@@ -261,7 +261,7 @@ Object posvblockToJSON(const CBlock& block, const CBlockIndex* blockindex)
             {
                 result.push_back(Pair("input from txid", txin.prevout.hash.GetHex()));
                 int64 vout2 = (boost::int64_t)txin.prevout.n;
-                result.push_back(Pair("begin processing previous tx, vout", vout2));
+//                result.push_back(Pair("begin processing previous tx, vout", vout2));
 
                 // backtrace transactions if not mined (need to know where the coins coming from)
                 CTransaction tx2;
@@ -483,7 +483,7 @@ Value listunspent(const Array& params, bool fHelp)
             CTxDestination address;
             if (ExtractDestination(pk, address))
             {
-                const CScriptID& hash = boost::get<const CScriptID&>(address);
+                const CScriptID& hash = boost::get<CScriptID>(address);
                 CScript redeemScript;
                 if (pwalletMain->GetCScript(hash, redeemScript))
                     entry.push_back(Pair("redeemScript", HexStr(redeemScript.begin(), redeemScript.end())));
